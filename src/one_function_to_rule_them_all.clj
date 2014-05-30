@@ -69,6 +69,18 @@
                           pred
                           preds)))
 
+(defn my-map [f & a-seq]
+  (let [my-map-1   map
+        my-map-2   map
+        transpose  (fn [a-seq] (reduce (partial my-map-2 conj) (my-map-1 vector (first a-seq))   (rest a-seq)))]
+    (my-map-1 #(apply f %) (transpose a-seq))))
 
-(defn my-map [f a-seq]
-  [:-])
+; (defn my-map-1 [f a-seq]
+;   (if (empty? a-seq)
+;     '()
+;     (cons (f (first a-seq)) (my-map-1 f (rest a-seq)))))
+; 
+; (defn my-map-2 [f a-seq b-seq]
+;   (if (or (empty? a-seq) (empty? b-seq))
+;     '()
+;     (cons (f (first a-seq) (first b-seq)) (my-map-2 f (rest a-seq) (rest b-seq)))))
